@@ -20,12 +20,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        etEmail = findViewById(R.id.etEmail)
-        btnLogin = findViewById(R.id.btnLogin)
-        tilEmail = findViewById(R.id.tilEmails)
-        etPassword = findViewById(R.id.etPassword)
-        tilPassword = findViewById(R.id.tilPassword)
-        tvSignup = findViewById(R.id.tvSignup)
+        castViews()
 
 
         tvSignup.setOnClickListener{
@@ -36,6 +31,15 @@ class LoginActivity : AppCompatActivity() {
           validateLogin()
             startActivity(Intent(this,HomeActivity::class.java))
         }
+    }
+
+    fun castViews(){
+        etEmail = findViewById(R.id.etEmail)
+        btnLogin = findViewById(R.id.btnLogin)
+        tilEmail = findViewById(R.id.tilEmails)
+        etPassword = findViewById(R.id.etPassword)
+        tilPassword = findViewById(R.id.tilPassword)
+        tvSignup = findViewById(R.id.tvSignup)
     }
     fun validateLogin(){
         var error = false
