@@ -4,34 +4,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.yasmin_m.workoutlog.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var bnvHome: BottomNavigationView
-    lateinit var fcvHome: FragmentContainerView
+    lateinit var binding: ActivityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-        castViews()
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupButtomNav()
-    }
-    fun castViews(){
-        bnvHome = findViewById(R.id.botton_navigation)
-        fcvHome = findViewById(R.id.fragmentContainerView)
     }
 
     fun setupButtomNav(){
-        bnvHome.setOnItemSelectedListener { item->
+        binding.bottonNavigation.setOnItemSelectedListener { item->
             when(item.itemId){
                 R.id.plan -> {
-                   var transaction = supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.fragmentContainerView, PlanFragment())
-                    transaction.commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, PlanFragment()).commit()
                     true
                 }
                 R.id.track -> {
-                    var transaction = supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.fragmentContainerView, TrackFragment())
-                    transaction.commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, TrackFragment()).commit()
                     true
                 }
                 R.id.profile -> {
