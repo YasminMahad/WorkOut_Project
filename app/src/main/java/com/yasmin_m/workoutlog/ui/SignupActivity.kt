@@ -1,14 +1,9 @@
-package com.yasmin_m.workoutlog
+package com.yasmin_m.workoutlog.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Patterns
-import android.widget.Button
-import android.widget.TextView
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.yasmin_m.workoutlog.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
@@ -20,11 +15,11 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSignup.setOnClickListener {
-            val intent = Intent(this,SignupActivity::class.java)
+            val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
         binding.tvSignin.setOnClickListener{
-            val intent= Intent(this,LoginActivity::class.java)
+            val intent= Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
         binding.btnSignup.setOnClickListener {

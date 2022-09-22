@@ -1,9 +1,8 @@
-package com.yasmin_m.workoutlog
+package com.yasmin_m.workoutlog.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentContainerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.yasmin_m.workoutlog.R
 import com.yasmin_m.workoutlog.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
