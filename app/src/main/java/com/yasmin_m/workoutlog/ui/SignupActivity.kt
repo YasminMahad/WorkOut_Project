@@ -1,16 +1,25 @@
 package com.yasmin_m.workoutlog.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import com.yasmin_m.workoutlog.ViewModel.UserViewModel
 import com.yasmin_m.workoutlog.databinding.ActivitySignupBinding
+import com.yasmin_m.workoutlog.models.RegisterRequest
 
 class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
+    lateinit var sharedPrefs: SharedPreferences
+    val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPrefs = getSharedPreferences("WORKOUTLOG_PREFS", MODE_PRIVATE)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -26,7 +35,19 @@ class SignupActivity : AppCompatActivity() {
             validateSignup()
         }
 
+    }
 
+    override fun onResume() {
+        super.onResume()
+        userViewModel.loginResponseLiveData.observe(this, Observer { RegisterResponse->
+            Toast.makeText(baseContext,RegisterResponse.message,Toast.LENGTH_LONG).show()
+            startActivity(Intent(baseContext,LoginActivity::class.java))
+            Toast.makeText(baseContext,RegisterResponse?.message,Toast.LENGTH_LONG).show()
+            startActivity(Intent(this@SignupActivity,LoginActivity::class.java))
+        })
+        userViewModel.regError.observe(this, Observer { error->
+            Toast.makeText(baseContext,error,Toast.LENGTH_LONG).show()
+        })
     }
 
     fun validateSignup() {
@@ -74,6 +95,8 @@ class SignupActivity : AppCompatActivity() {
             binding.tilConfirm.error= "Password does not match"
         }
         if (!error) {
+            val registerRequest = RegisterRequest(firstname, Lastname, Email, password, confirm)
+            userViewModel.registerUser(registerRequest)
         }
         }
     }
